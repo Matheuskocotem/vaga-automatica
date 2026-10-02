@@ -27,7 +27,6 @@
         "apply_to_english_vacancy":false,
         "apply_to_portuguese_vacancy":true,
         "keyword":"(QA OR SDET OR \"Analista de Testes\" OR \"Software Engineer\" OR \"Desenvolvedor Java\" OR \"Desenvolvedor Backend\") AND (PJ OR \"Pessoa Jurídica\") NOT CLT NOT Senior NOT Sênior NOT Lead NOT Especialista NOT Staff",
-        "blocked_title_words":["senior", "sr", "staff", "lead", "especialista", "principal"],
         "sleep_time_between_applications":60,
         "use_job_model":true,
         "filter_remote_job":true,

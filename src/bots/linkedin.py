@@ -5,14 +5,11 @@ from src.enums import InputType
 #libs
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import StaleElementReferenceException
 from langdetect import detect
 import ollama
 #native libs
 import time
 import logging
-import unicodedata
-import re
 
 class LinkedinBot(Bot):
 
@@ -54,15 +51,6 @@ class LinkedinBot(Bot):
         print(f"url is: {job_url}")
         return job_url
     
-    def get_blocked_title_word(self, title:str) -> str | None:
-        #compara sem acento e por palavra inteira (ex: "sênior" == "senior", "sr" não pega "srs")
-        normalized = unicodedata.normalize("NFKD", title).encode("ascii", "ignore").decode().lower()
-        for word in self.opt["linkedin"].get("blocked_title_words", []):
-            word = unicodedata.normalize("NFKD", word).encode("ascii", "ignore").decode().lower()
-            if re.search(rf"\b{re.escape(word)}\b", normalized):
-                return word
-        return None
-
     def subscribe_to_all_jobs(self) -> None:
         self.driver.get(self.get_jobsearch_url())
         is_premium = True
@@ -72,19 +60,10 @@ class LinkedinBot(Bot):
         while True:
             self.wait_for_page_load()
             #encontra e scrolla o container da lista de jobs
-            #o linkedin re-renderiza a lista depois do load, então tenta de novo se o elemento ficar obsoleto
-            for attempt in range(5):
-                time.sleep(2)
-                try:
-                    jobs = self.get_elements(10, By.CSS_SELECTOR, "div[data-job-id]")
-                    print(f"jobs antes de scrolar = {len(jobs)}")
-                    jobs_scroll = self.get_dad(jobs[0], 4)
-                    self.scroll_element(jobs_scroll)
-                    break
-                except StaleElementReferenceException:
-                    print(f"LISTA DE JOBS RE-RENDERIZOU, TENTANDO DE NOVO ({attempt + 1}/5)")
-            else:
-                raise Exception("NÃO FOI POSSÍVEL CARREGAR A LISTA DE JOBS")
+            jobs = self.get_elements(3, By.CSS_SELECTOR, "div[data-job-id]")
+            print(f"jobs antes de scrolar = {len(jobs)}")
+            jobs_scroll = self.get_dad(jobs[0], 4)
+            self.scroll_element(jobs_scroll)
             jobs = self.get_elements(3, By.CSS_SELECTOR, "div[data-job-id]")
             print(f"jobs após scrolar = {len(jobs)}")
             #encontra o container das informações do job
@@ -118,11 +97,6 @@ class LinkedinBot(Bot):
                 #coletar dados do job
                 title = self.driver.find_element(By.CSS_SELECTOR, ".t-24.job-details-jobs-unified-top-card__job-title").text
                 print(f"title = {title}")
-                blocked_word = self.get_blocked_title_word(title)
-                if blocked_word is not None:
-                    print(f"IGNORANDO JOB, TÍTULO CONTÉM '{blocked_word}'")
-                    actual_job = actual_job + 1
-                    continue #ignora job
                 id = self.get_url_params()["currentJobId"]
                 print(f"id = {id}")
                 if is_premium:
