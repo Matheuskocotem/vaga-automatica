@@ -1,0 +1,64 @@
+{
+    "actual_bot":"linkedin",
+    "private_info":{
+        "first_name":"Matheus",
+        "last_name":"Kocotem",
+        "cellphone":"5542988361853",
+        "address":"Guarapuava, Paraná, Brasil",
+        "base_years_of_experience":"4",
+        "base_salary":"6000",
+        "cpf":"11011584921",
+        "birthday":"02/04/2007"
+    },
+    "print": {
+        "system_prompt":false,
+        "details":false
+    },
+    "driver":{
+        "load_profile":true,
+        "show_cursor":false,
+        "headless":false,
+        "auto_open_devtools":false,
+        "maximized":false,
+        "profile_name":"chrome_profile",
+        "use_ai_cursor":false
+    },
+    "linkedin":{
+        "apply_to_english_vacancy":false,
+        "apply_to_portuguese_vacancy":true,
+        "keyword":"(QA OR SDET OR \"Analista de Testes\" OR \"Software Engineer\" OR \"Desenvolvedor Java\" OR \"Desenvolvedor Backend\") AND (PJ OR \"Pessoa Jurídica\") NOT CLT NOT Senior NOT Sênior NOT Lead NOT Especialista NOT Staff",
+        "blocked_title_words":["senior", "sr", "staff", "lead", "especialista", "principal"],
+        "sleep_time_between_applications":60,
+        "use_job_model":true,
+        "filter_remote_job":true,
+        "filter_hibrid_job":false,
+        "filter_onsite_job":false,
+        "use_timelapse":true,
+        "max_timelapse_in_seconds":604800,
+        "use_geoid":false,
+        "geoid":"56057199",
+        "use_max_distance":false,
+        "max_distance_in_miles":"30",
+        "in_my_chain":false,
+        "low_candidates":false,
+        "use_experience_level":true,
+        "internship":false,
+        "assistent":false,
+        "junior":true,
+        "pleno_and_senior":true,
+        "director":false,
+        "executive":false
+    },
+    "indeed":{
+
+    },
+    "ai":{
+        "model":"gemma3:4b",
+        "en_private_info":"My name is Matheus Kocotem, my cellphone is 5542988361853, I am from Guarapuava, Paraná, Brazil. My CPF is 11011584921. My birthday is 02/04/2007. I am a software engineer with 2 years of backend experience (Java, Spring Boot, Python) and 1 year as a QA Engineer (test automation).",
+        "pt_private_info":"Meu nome é Matheus Kocotem, meu celular é 5542988361853, sou de Guarapuava, Paraná, Brasil. Meu CPF é 11011584921. Meu aniversário é 02/04/2007. Sou engenheiro de software com 2 anos de experiência em backend (Java, Spring Boot, Python) e 1 ano como QA Engineer (automação de testes).",
+        "en_numeric_prompt": "You are an agent specialized in filling LinkedIn job openings. {en_private_info}. If the question is about years of experience with Java, backend development or software development, answer 2. If it is about QA, software testing, test automation, Selenium, Cypress or API testing, answer 1. If it is about Python, Spring Boot, SQL, Docker, Kubernetes, Terraform, AWS, Git or CI/CD, answer 1. If it is about total years of experience in IT, answer 3. For any other skill not listed, answer 0. If it involves a preference between CLT or PJ, answer PJ. If it involves salary expectation, answer 7000. Your English level is intermediate (B2), not advanced or fluent. The field almost always expects an integer.",
+        "pt_numeric_prompt": "Você é um agente especializado em preencher vagas do linkedin. {pt_private_info}. Se a pergunta envolver tempo de experiência com Java, desenvolvimento backend ou desenvolvimento de software, responda 2. Se envolver QA, testes de software, automação de testes, Selenium, Cypress ou testes de API, responda 1. Se envolver Python, Spring Boot, SQL, Docker, Kubernetes, Terraform, AWS, Git ou CI/CD, responda 1. Se envolver tempo total de experiência em TI, responda 3. Para qualquer outra skill não listada, responda 0. Se envolver preferência entre CLT ou PJ, responda PJ. Se envolver pretensão salarial, responda 7000. Seu nível de inglês é intermediário (B2), não avançado nem fluente. O campo quase sempre espera por um número inteiro.",
+        "en_dropdown_prompt": "You are a LinkedIn automation agent. Your task is to answer a multiple-choice question. Your task is to choose one of the options from a dropdown menu HTML <select>. The available options are: {options_list}. Your English level is intermediate (B2), not advanced, fluent or native. Your response MUST be EXACTLY one of the options listed above. Do not provide any explanations, thoughts, or extra characters.If the question is about employment type or contract, choose PJ (or the option closest to contractor/self-employed).",
+        "pt_dropdown_prompt": "Você é um agente de automação do LinkedIn. Sua tarefa é responder a uma pergunta de múltipla escolha. Sua tarefa é escolher uma das opções de um menu suspenso HTML <select>. As opções disponíveis são: {options_list}. Seu nível de inglês é intermediário (B2), não avançado, fluente nem nativo. Sua resposta DEVE ser EXATAMENTE uma das opções listadas acima. Não forneça explicações, pensamentos ou caracteres extras. Se a pergunta for sobre tipo de contratação ou regime, escolha PJ (ou a opção mais próxima de prestador de serviço/autônomo)."
+    }
+}
